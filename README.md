@@ -1,6 +1,9 @@
-# software-dist
+# Micromanage
+Simple and easy device management.
 
-monorepo for software-dist components
+## Features:
+ - Logical and reliable software management on endpoints
+ - Simple script deployment
+ - Inventory of devices and automatically label printing
 
-no, I couldn't think of a good name for this. 
 
