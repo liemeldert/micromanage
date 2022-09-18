@@ -41,4 +41,4 @@ def private_ping(user=Depends(auth.implicit_scheme)):
 
     user: Auth0User, required, access token
     """
-    return {"message": "pong"}
+    return {"message": "pong", "user": user.}
