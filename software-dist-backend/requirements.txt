@@ -1,7 +1,0 @@
-motor
-beanie
-fastapi
-pymongo[srv]
-fastapi_auth0
-uvicorn[standard]
-python-dotenv
