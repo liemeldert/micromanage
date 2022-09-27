@@ -3,7 +3,6 @@ import json
 from fastapi import status, APIRouter, Security
 from fastapi_auth0 import Auth0User
 
-from ..internal import database
 from ..internal.models import Organization, Site
 from ..internal.utils import auth
 

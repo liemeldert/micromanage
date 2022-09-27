@@ -1,6 +1,7 @@
 import datetime
 
 from beanie import Document, Indexed
+from redis_om import HashModel
 
 
 class User(Document):
@@ -40,3 +41,28 @@ class Organization(Document):
     admins: list
     plan: int
     sites: list
+
+
+################
+# Redis Models #
+################
+
+
+class Task(HashModel):
+    """
+    Task model
+    status codes:
+        0 - not started/queued
+        1 - in progress
+        2 - completed
+        3 - failed
+    reattempt is the number of times the task will be retried before
+    """
+    device_id: str
+    command: str
+    status: int
+    reattempt: int = 0
+
+    time_enqueued = datetime.datetime.now()
+    time_started: datetime.time
+    time_completed: datetime.time

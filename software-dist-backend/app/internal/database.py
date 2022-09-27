@@ -8,7 +8,6 @@ from .models import Organization
 
 client = pymongo.MongoClient(MONGO_URI)
 
-
 def initialize_collections(collections: list, project_id: int) -> None:
     """Initialize collections for a new project.
 

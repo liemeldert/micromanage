@@ -1,7 +1,12 @@
-motor
-beanie
-fastapi
-pymongo[srv]
+motor~=2.5.1
+beanie~=1.11.9
+fastapi~=0.77.1
+pymongo[srv]~=3.12.3
 fastapi_auth0
 uvicorn[standard]
-python-dotenv
+python-dotenv~=0.21.0
+redis_om
+
+redis~=4.3.4
+pydantic~=1.10.2
+sse-starlette
