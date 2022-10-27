@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd0898a6-500b-4077-b82a-ab861ae8ce1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/software-dist.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/software-dist.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/internal/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/internal/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/internal/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/internal/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/client/client_rtc.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/client/client_rtc.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/routers/client/client_rtc.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/internal/models.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/internal/tasks.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2FUgkxyvOIW74xIg0RtaQ1Oxq5g" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MySchoolAppLabelGen" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd0898a6-500b-4077-b82a-ab861ae8ce1c" name="Changes" comment="" />
+      <created>1664552224146</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664552224146</updated>
+      <workItem from="1664552225511" duration="838000" />
+      <workItem from="1664677484894" duration="2841000" />
+      <workItem from="1664807530115" duration="124000" />
+      <workItem from="1664896609628" duration="4870000" />
+      <workItem from="1665075247662" duration="692000" />
+      <workItem from="1665158860634" duration="1865000" />
+      <workItem from="1665584945643" duration="2016000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
