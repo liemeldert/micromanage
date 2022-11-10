@@ -1,13 +1,10 @@
 import asyncio
 import json
+import json
 import threading
-from urllib.request import Request
-from app.internal.models import MacPackage, Task, Application
 from fastapi import status, APIRouter, WebSocket, WebSocketDisconnect
-from app.internal import database
-from app.internal.models import Organization, Site, Device
-from app.internal.utils import auth
-from app.internal import tasks, s3
+from app.internal import s3
+from app.internal.models import Device, Task
 
 router = APIRouter()
 
@@ -34,9 +31,9 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_id: st
         async def send_events(websocket, device: Device) -> None:
             """Device event receiver"""
             while running:
+                await asyncio.sleep(10)
                 await device.update()
                 # Generate tasks
-
                 device_tasks: list[Task] = sorted(device.tasks, key=lambda x: x.task_id)
                 for index, task in enumerate(device_tasks):
                     if task.status == 0:
@@ -44,9 +41,9 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_id: st
                         await websocket.send_text("is installed:")
                         await websocket.send_json(task.json())
                         resp = await websocket.receive_text()
-                        if resp == "installed: true":
+                        if resp == "installed: false":
                             task.status = 1
-                        elif resp == "installed: false":
+                        elif resp == "installed: true":
                             task.status = 4
                         device.tasks = device_tasks
                         await device.save()
@@ -74,14 +71,11 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_id: st
             """On message received"""
             while running:
                 command = await websocket.receive_text()
-                # probably unused
-                if command == "task update":
-                    message = json.loads(await websocket.receive_json())
+                if command in ["shutdown", "restart", " sleep", "update"]:
+                    device.state = command
                     await device.update()
-                    for index, each in enumerate(device.tasks):
-                        if each.task_id == message['task_id']:
-                            device.tasks[index] = Task(**message)
-                            break
+
+        # Create threads to both receive when devices go offline and to send installs
         events = threading.Thread(target=send_events, args=(websocket, device), daemon=True)
         messages = threading.Thread(target=receive_messages, args=(websocket, device), daemon=True)
         events.start()
@@ -89,5 +83,5 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_id: st
     except WebSocketDisconnect:
         await websocket.close()
         running = False
-        device.state = 0
+        device.state = None
         await device.save()

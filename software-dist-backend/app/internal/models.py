@@ -127,7 +127,7 @@ class Device(Document):
     tenant: str = None
     system: Json = None
     organization: str = None
-    state: int = 0  # 0 for d/n, 1 for online, 2 for fell asleep
+    state: str = None  # 0 for d/n, 1 for online, 2 for fell asleep, 3 for shutdown, 4 for rebooting, 5 for updating
 
 
 class DeviceGroup(Document):
