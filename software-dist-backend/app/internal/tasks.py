@@ -2,18 +2,8 @@ import asyncio
 import pickle
 
 import pymongo
-import redis
-import datetime
-from .config import MONGO_URI, REDIS_URL, REDIS_PORT, REDIS_PASSWORD
-from typing import Optional
-from pydantic import EmailStr
-from redis_om import HashModel
-from models import Device, Organization, Site, Task
-
-rClient = redis.Redis(
-    host=REDIS_URL,
-    port=REDIS_PORT,
-    password=REDIS_PASSWORD,)
+from .config import MONGO_URI
+from .models import Device, Organization, Site
 
 callbacks = {}
 

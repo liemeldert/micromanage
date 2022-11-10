@@ -5,43 +5,104 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd0898a6-500b-4077-b82a-ab861ae8ce1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/software-dist.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/software-dist.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/.idea/mac-client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/mac.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mac-client/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micromanaged/micromanaged.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micromanaged/micromanaged.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micromanaged/micromanaged.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micromanaged/micromanaged.xcodeproj/project.xcworkspace/xcuserdata/cbeomjun.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micromanaged/micromanaged.xcodeproj/xcuserdata/cbeomjun.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micromanaged/micromanaged/main.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui.xcodeproj/project.xcworkspace/xcuserdata/cbeomjun.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui.xcodeproj/xcuserdata/cbeomjun.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/Assets.xcassets/AccentColor.colorset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/Assets.xcassets/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/ContentView.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/Preview Content/Preview Assets.xcassets/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/mm_ui.entitlements" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-ui/mm_uiApp.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-uiTests/mm_uiTests.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-uiUITests/mm_uiUITests.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mm-ui/mm-uiUITests/mm_uiUITestsLaunchTests.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/software-dist-backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/internal/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/internal/database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/internal/exceptions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/internal/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/captain-definition" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pre-commit-config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/internal/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/internal/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/internal/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/internal/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routers/client/client_rtc.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/client/client_rtc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/site.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/site.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/app/routers/client/client_rtc.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/internal/models.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/internal/tasks.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/routers/client/client_rtc.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2FUgkxyvOIW74xIg0RtaQ1Oxq5g" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MySchoolAppLabelGen" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="vue.rearranger.settings.migration" value="true" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/cbeomjun/Documents/GitHub/micromanage/software-dist-backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/internal" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -58,6 +119,10 @@
       <workItem from="1665075247662" duration="692000" />
       <workItem from="1665158860634" duration="1865000" />
       <workItem from="1665584945643" duration="2016000" />
+      <workItem from="1668005280687" duration="1316000" />
+      <workItem from="1668007456747" duration="851000" />
+      <workItem from="1668014599830" duration="3790000" />
+      <workItem from="1668089365687" duration="1984000" />
     </task>
     <servers />
   </component>

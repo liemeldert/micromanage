@@ -82,7 +82,3 @@ async def add_user(site_id: str, new_user_id: str, user: Auth0User = Security(au
     await site.save()
 
     return {status.HTTP_200_OK}
-
-
-@router.
-

@@ -1,7 +1,7 @@
 import datetime
 
 from beanie import Document, Indexed
-from pydantic import BaseModel
+from pydantic import BaseModel, Json
 
 
 class BasePackage(Document):
@@ -62,7 +62,7 @@ class Task(BaseModel):
     timestamp: str = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     application: Application
     package: MacPackage or MacScript
-    status: int = 0
+    status: int = 0  # 0, pending, 1, queued, 2, downloading, 3, installing, 4, failed
     status_reason: str = None
 
 
@@ -124,7 +124,8 @@ class Device(Document):
     group_id: str
     tasks: list[Task]
     additional_info: dict = None
-    site: str = None
+    tenant: str = None
+    system: Json = None
     organization: str = None
     state: int = 0  # 0 for d/n, 1 for online, 2 for fell asleep
 
@@ -136,30 +137,5 @@ class DeviceGroup(Document):
     name: str
     description: str
     members: list[Device]
+    applictions: list[Application]
     site: str
-
-
-
-
-
-
-
-
-# class Task(HashModel):
-#     """
-#     Task model
-#     status codes:
-#         0 - not started/queued
-#         1 - in progress
-#         2 - completed
-#         3 - failed
-#     reattempt is the number of times the task will be retried before
-#     """
-#     device_id: str
-#     command: str
-#     status: int
-#     reattempt: int = 0
-#
-#     time_enqueued = datetime.datetime.now()
-#     time_started: datetime.time
-#     time_completed: datetime.time
