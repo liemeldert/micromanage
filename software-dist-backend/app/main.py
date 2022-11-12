@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends
 from fastapi_auth0 import Auth0User
 
 from .internal.config import MONGO_URI
-from .internal.models import User
+from .internal.models import *
 from .internal.utils import auth
 from .routers import site, org
 from .routers.client import client_rtc
@@ -17,13 +17,16 @@ app.include_router(org.router)
 
 @app.on_event("startup")
 async def init():
+    """Function that runs on startup.
+    """
     # Create Motor client
     client = motor.motor_asyncio.AsyncIOMotorClient(
         MONGO_URI
     )
 
     # Init beanie with the Product document class
-    await init_beanie(database=client.db_name, document_models=[User])
+    await init_beanie(database=client.db_name, document_models=[User, MacPackage, MacScript,
+                                                                Site, Organization, Device])
 
 
 @app.get("/ping")

@@ -14,8 +14,8 @@ def get_serial() -> str:
     """
     Returns the current system's serial number.
     """
-    return subprocess.run("system_profiler SPHardwareDataType | awk '/Serial Number/ {print $4}'",
-                            stdout=subprocess.PIPE, shell=True, check=True).stdout.strip()
+    return str(subprocess.run("system_profiler SPHardwareDataType | awk '/Serial Number/ {print $4}'",
+                            stdout=subprocess.PIPE, shell=True, check=True).stdout.strip())
 
 
 def get_system() -> System:
