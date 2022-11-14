@@ -1,7 +1,7 @@
 import datetime
 
 from beanie import Document, Indexed
-from pydantic import BaseModel, Json
+from pydantic import BaseModel
 
 
 class BasePackage(Document):
@@ -59,7 +59,8 @@ class Task(BaseModel):
     """
     task_id: int
     command: str
-    timestamp: str = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    timestamp: datetime = datetime.datetime.now()
+    exec_time: datetime = datetime.datetime.now()
     application: Application
     package: MacPackage or MacScript
     status: int = 0  # 0, pending, 1, queued, 2, downloading, 3, installing, 4, failed
@@ -86,7 +87,7 @@ class User(Document):
     projects: list
 
 
-class Site(Document):
+class Tenant(Document):
     """
     Project model
     """
@@ -97,7 +98,7 @@ class Site(Document):
     organization: str
     collections: list
 
-    block_unknown_devices: bool = False
+    autoenroll: bool = False
 
 
 class Organization(Document):
@@ -118,16 +119,25 @@ class Device(Document):
     Device model
     """
     name: str = None
-    identifier: str  # SN for Mac, idk for Windows.
-    site: Site
+
+    hostname: str = None
+    serial: str
+    uuid: str
+    mac_address: str
+    model: str
+    processor: str
+    os_version: str
+    os_build: str
+
+    site: Tenant
     tags: list = None
     group_id: str
     tasks: list[Task]
     additional_info: dict = None
     tenant: str = None
-    system: Json = None
     organization: str = None
     state: str = None  # 0 for d/n, 1 for online, 2 for fell asleep, 3 for shutdown, 4 for rebooting, 5 for updating
+    laptop: bool = False  # Enables checking for updates prior to going to sleep.
 
 
 class DeviceGroup(Document):
@@ -137,5 +147,5 @@ class DeviceGroup(Document):
     name: str
     description: str
     members: list[Device]
-    applictions: list[Application]
+    applications: list[Application]
     site: str

@@ -5,7 +5,7 @@ from fastapi import status, APIRouter, Security
 from fastapi_auth0 import Auth0User
 
 from ..internal import database
-from ..internal.models import Organization, Site
+from ..internal.models import Organization, Tenant
 from ..internal.utils import auth
 
 router = APIRouter()
@@ -27,7 +27,7 @@ async def get_site(org_id: str, site_id: str, user: Auth0User = Security(auth.ge
     if user.id not in org.users:
         return status.HTTP_403_FORBIDDEN
 
-    site = await Site.get(PydanticObjectId(site_id))
+    site = await Tenant.get(PydanticObjectId(site_id))
     return {"site": site.json()}
 
 

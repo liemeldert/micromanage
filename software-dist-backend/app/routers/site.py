@@ -3,7 +3,7 @@ import json
 from fastapi import status, APIRouter, Security
 from fastapi_auth0 import Auth0User
 
-from ..internal.models import Organization, Site
+from ..internal.models import Organization, Tenant
 from ..internal.utils import auth
 
 ######################
@@ -37,7 +37,7 @@ async def get_site(org_id: str, site_id: str, user: Auth0User = Security(auth.ge
     :param site_id:
     :return:
     """
-    site = await Site.find({"_id": site_id}).first_or_none()
+    site = await Tenant.find({"_id": site_id}).first_or_none()
 
     if user.id not in site.users:
         return {status.HTTP_403_FORBIDDEN}
@@ -46,13 +46,13 @@ async def get_site(org_id: str, site_id: str, user: Auth0User = Security(auth.ge
 
 
 @router.post("/{site_id}/edit")
-async def edit_site(site_id: str, new_site: Site, user: Auth0User = Security(auth.get_user)):
+async def edit_site(site_id: str, new_site: Tenant, user: Auth0User = Security(auth.get_user)):
     """
     Edits site information.APIRouter
     :param site_id: ID for site
     :return: 201
     """
-    site = await Site.find({"_id": site_id}).first_or_none()
+    site = await Tenant.find({"_id": site_id}).first_or_none()
 
     if user.id not in site.users:
         return {status.HTTP_403_FORBIDDEN}
@@ -73,7 +73,7 @@ async def add_user(site_id: str, new_user_id: str, user: Auth0User = Security(au
     :param new_user_id: Auth0 ID for user being added
     :param user: Current Auth0 user making change
     """
-    site = await Site.find({"_id": site_id}).first_or_none()
+    site = await Tenant.find({"_id": site_id}).first_or_none()
 
     if user.id not in site.users:
         return {status.HTTP_403_FORBIDDEN}

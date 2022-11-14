@@ -26,7 +26,7 @@ async def init():
 
     # Init beanie with the Product document class
     await init_beanie(database=client.db_name, document_models=[User, MacPackage, MacScript,
-                                                                Site, Organization, Device])
+                                                                Tenant, Organization, Device])
 
 
 @app.get("/ping")
