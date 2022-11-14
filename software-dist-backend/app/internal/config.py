@@ -10,7 +10,7 @@ for each in required_env:
 
 load_dotenv()
 
-MONGO_URI = os.getenv('DATABASE_CONNECTION_URL')
+MONGO_URI = os.getenv('MONGO_URI')
 AUTH0_URL = os.getenv('AUTH0_TENANT_URL')
 AUTH0_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
 aws_endpoint = os.getenv('AWS_ENDPOINT')  # https://s3.wasabisys.com
