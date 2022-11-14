@@ -1,7 +1,6 @@
 import asyncio
 import datetime
 import json
-import json
 import threading
 from fastapi import status, APIRouter, WebSocket, WebSocketDisconnect
 from app.internal import s3
@@ -31,7 +30,7 @@ async def exec_task(device: Device, task: Task, websocket: WebSocket) -> None:
         await device.save()
         return
 
-    # todo: implement usage of location specific s3 buckets
+    # todo: implement usage of location specific s3 buckets, shouldn't be too bad??
     await websocket.send_text("install:" + s3.create_presigned_url("mmpkgstore-va", task.package.id))
     while True:
         # check for update in task status
@@ -39,6 +38,7 @@ async def exec_task(device: Device, task: Task, websocket: WebSocket) -> None:
         if resp == "istatus: complete":
             device_tasks.remove(task)
             break
+        #
         if resp == "istatus: failed":
             task.status = 4
             device.tasks = device_tasks
@@ -105,8 +105,11 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_id: st
                 if command == "sleep":
                     device.state = "sleep"
                     await device.update()
-                    for task in device.tasks:
-                        await exec_task(device, task, websocket)
+                    if not device.laptop:
+                        for task in device.tasks:
+                            if task.status == 0:
+                                await exec_task(device, task, websocket)
+                    websocket.send_text("sleep")
 
         # Create threads to both receive when devices go offline and to send installs
         events = threading.Thread(target=send_events, args=(websocket, device), daemon=True)
