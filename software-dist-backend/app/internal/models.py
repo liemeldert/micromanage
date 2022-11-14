@@ -59,8 +59,8 @@ class Task(BaseModel):
     """
     task_id: int
     command: str
-    timestamp: datetime = datetime.datetime.now()
-    exec_time: datetime = datetime.datetime.now()
+    timestamp: datetime.datetime = datetime.datetime.now()
+    exec_time: datetime.datetime = datetime.datetime.now()
     application: Application
     package: MacPackage or MacScript
     status: int = 0  # 0, pending, 1, queued, 2, downloading, 3, installing, 4, failed
