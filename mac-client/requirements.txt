@@ -1,0 +1,2 @@
+pydantic
+websocket-client
