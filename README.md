@@ -15,4 +15,5 @@ tldr; munki, but flipped.
  - local appstore-like interface - mm-ui
  - finish the client so it fully reports information - mac-client
  - fix some of the awful hacks in the backend - mm-backend
+ - CI stuff
 
