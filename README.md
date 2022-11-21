@@ -1,6 +1,7 @@
 # Micromanage
-Simple and easy device management.
-tldr; munki, but flipped, for when you don't really trust your users to do stuff or for computer lab use
+Remotely install and manage clients
+
+tldr; munki, but flipped.
 
 ## Features:
  - Backend tells clients to install software - not hoping the client can do that sucessfully.
