@@ -31,7 +31,15 @@ async def get_site(org_id: str, site_id: str, user: Auth0User = Security(auth.ge
     return {"site": site.json()}
 
 
-
 @router.post("/create_organization")
-async def create_organization(org: Organization):
-    new_org = Organization(*org)
+async def create_organization(new_org: Organization, user: Auth0User = Security(auth.get_user)):
+    jason = json.loads(new_org.json())
+    jason.pop("_id")
+
+    org = Organization(**jason)
+
+    try:
+        await org.save()
+    except Exception as e:
+        return {"error": str(e)}
+    return org.json()

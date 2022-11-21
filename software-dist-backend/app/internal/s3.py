@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 from .config import aws_secret_access_key, aws_access_key_id, aws_endpoint
 
 
-def create_presigned_url(bucket_name, object_name, expiration=3600):
+def create_presigned_url(bucket_name: str, object_name: str, expiration=3600):
     """Generate a presigned URL to share an S3 object
 
     :param bucket_name: string
@@ -14,10 +14,14 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
     """
 
     # Generate a presigned URL for the S3 object
+    # s3_client = boto3.client('s3',
+    #                          endpoint_url=aws_endpoint,
+    #                          aws_access_key_id=aws_access_key_id,
+    #                          aws_secret_access_key=aws_secret_access_key)
     s3_client = boto3.client('s3',
-                             endpoint_url=aws_endpoint,
-                             aws_access_key_id=aws_access_key_id,
-                             aws_secret_access_key=aws_secret_access_key)
+                             endpoint_url="https://s3.wasabisys.com",
+                             aws_access_key_id="GHW7O8W8GU3OYDSQ7K84",
+                             aws_secret_access_key="wYNpDNuO6tK9vesRWja4EXJvWCACCkjFniPAYye5")
 
     try:
         response = s3_client.generate_presigned_url('get_object',

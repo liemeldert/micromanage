@@ -1,3 +1,5 @@
+import logging
+
 import motor
 from beanie import init_beanie
 from fastapi import FastAPI, Depends
@@ -6,13 +8,17 @@ from fastapi_auth0 import Auth0User
 from .internal.config import MONGO_URI
 from .internal.models import *
 from .internal.utils import auth
-from .routers import site, org
+from .routers import tentant, org, application, device
 from .routers.client import client_rtc
 
 app = FastAPI()
-app.include_router(site.router)
+app.include_router(tentant.router)
 app.include_router(client_rtc.router)
+app.include_router(application.router)
 app.include_router(org.router)
+app.include_router(device.router)
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 @app.on_event("startup")
@@ -26,7 +32,8 @@ async def init():
 
     # Init beanie with the Product document class
     await init_beanie(database=client.db_name, document_models=[User, MacPackage, MacScript,
-                                                                Tenant, Organization, Device])
+                                                                Tenant, Organization, Device,
+                                                                Application, DeviceGroup])
 
 
 @app.get("/ping")
