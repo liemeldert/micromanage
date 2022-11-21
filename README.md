@@ -10,3 +10,8 @@ tldr; munki, but flipped.
  - Inventory of devices and automatically label printing maybe
 
 
+## Things to do:
+ - frontend, probably react or vue
+ - finish the client so it fully reports information
+ - fix some of the awful hacks in the backend
+
