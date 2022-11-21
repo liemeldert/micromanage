@@ -27,13 +27,14 @@ def get_installed() -> list[str]:
                               stdout=subprocess.PIPE, shell=True, check=True).stdout.strip()).split("\n")
 
 
-def get_system() -> System:
+def get_system() -> dict:
     profiler = str(subprocess.run("system_profiler SPHardwareDataType",
-                                  stdout=subprocess.PIPE, shell=True, check=True).stdout.strip())[32:].split("\n")
+                                  stdout=subprocess.PIPE, shell=True, check=True
+                                  ).stdout.strip())[47:].replace("      ", "").replace(" (system)", "").split("\\n")
     sys_info = {}
     for each in profiler:
         sys_info.update({each.split(": ")[0]: each.split(": ")[1]})
-    return System(**sys_info)
+    return sys_info
 
 
 def install_pkg(path: str = "/tmp/mmpkg.pkg"):
@@ -58,25 +59,23 @@ def install_dmg(path: str = "/tmp/mmdmg.dmg", install_path: str = "/Applications
     """
     try:
         result = str(
-            subprocess.run(f"hdiutil attach {path}", stdout=subprocess.PIPE, shell=True, check=True).stdout.strip())
+            subprocess.run(f"hdiutil attach '{path}'", stdout=subprocess.PIPE, shell=True, check=True).stdout.strip())
         if "hdiutil: attach failed - No such file or directory" in result:
             raise FileNotFoundError("DMG not found.")
         elif "hdiutil: attach failed - Resource busy" in result:
             raise pydantic.ValidationError("DMG is already mounted.")
         elif "hdiutil: attach failed - " in result:
             raise pydantic.ValidationError("DMG is not a valid DMG file.")
-        volume = result.split("\t")[0]
-
-        files = str(subprocess.run(f"ls {volume}", stdout=subprocess.PIPE,
-                                   shell=True, check=True).stdout.strip()).replace("		", "\n").split("\n")
+        volume = result.split("\\t")[-1][:-1]
+        output = subprocess.getoutput(f"ls {volume}").replace("\n", "")
+        files = output[1:].split("		")
         filename = []
         for each in files:
             if ".app" in each:
-                filename.append(each)
+                filename.append(str(each))
         for each in filename:
             # todo: check for out of space error.
-            output = str(subprocess.run(f"cp {volume}/{each} {install_path}/{each}",
-                                        shell=True, check=True).stdout.strip())
+            subprocess.run(f"cp -r {volume}/{each} {install_path}/{each}", shell=True, check=True)
 
         subprocess.run(f"hdiutil detach {volume}", shell=True, check=True)
         subprocess.run(f"rm {path}", shell=True, check=True)

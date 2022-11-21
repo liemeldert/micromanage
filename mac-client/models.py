@@ -1,5 +1,5 @@
 import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, AnyUrl
 
 
 class BasePackage(BaseModel):
@@ -19,9 +19,11 @@ class MacPackage(BaseModel):
     name: str
     icon_url: str
     package_name: str
-    package_url: str
-    package_on_s3: bool  # if the package is stored on our s3 server, if so it will create presigned url.
+    type: str = "pkg"
+    url: AnyUrl = None
+    s3_obj: str = None
     version: str
+    application_id: str
 
     installed_application_path: str
 
@@ -41,9 +43,9 @@ class Application(BaseModel):
     Applications model storing versions
     """
     name: str
-    description: str
-    site: str
-    mac_packages: list[MacPackage or MacScript]
+    description: str = ""
+    organization: str
+    mac_packages: list[str] = []
 
 
 ###################
@@ -59,6 +61,7 @@ class Task(BaseModel):
     command: str
     timestamp: datetime.datetime = datetime.datetime.now()
     exec_time: datetime.datetime = datetime.datetime.now()
+    last_update_time: datetime.datetime = None
     application: Application
     package: MacPackage or MacScript
     status: int = 0  # 0, pending, 1, queued, 2, downloading, 3, installing, 4, failed
