@@ -11,7 +11,8 @@ tldr; munki, but flipped.
 
 
 ## Things to do:
- - frontend, probably react or vue
- - finish the client so it fully reports information
- - fix some of the awful hacks in the backend
+ - frontend, probably react or vue - mm-web
+ - local appstore-like interface - mm-ui
+ - finish the client so it fully reports information - mac-client
+ - fix some of the awful hacks in the backend - mm-backend
 
