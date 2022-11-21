@@ -14,14 +14,10 @@ def create_presigned_url(bucket_name: str, object_name: str, expiration=3600):
     """
 
     # Generate a presigned URL for the S3 object
-    # s3_client = boto3.client('s3',
-    #                          endpoint_url=aws_endpoint,
-    #                          aws_access_key_id=aws_access_key_id,
-    #                          aws_secret_access_key=aws_secret_access_key)
     s3_client = boto3.client('s3',
-                             endpoint_url="https://s3.wasabisys.com",
-                             aws_access_key_id="GHW7O8W8GU3OYDSQ7K84",
-                             aws_secret_access_key="wYNpDNuO6tK9vesRWja4EXJvWCACCkjFniPAYye5")
+                             endpoint_url=aws_endpoint,
+                             aws_access_key_id=aws_access_key_id,
+                             aws_secret_access_key=aws_secret_access_key)
 
     try:
         response = s3_client.generate_presigned_url('get_object',
