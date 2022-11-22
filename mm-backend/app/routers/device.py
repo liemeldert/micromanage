@@ -12,7 +12,7 @@ from ..internal.utils import auth
 router = APIRouter()
 
 
-@router.post("/{tenant_id}/{serial}/create_device") #  user: Auth0User = Security(auth.get_user)
+@router.post("/{tenant_id}/{serial}/create_device")  # user: Auth0User = Security(auth.get_user)
 async def create_device(tenant_id: str, serial: str):
     """
     Creates a new device.
@@ -126,5 +126,3 @@ async def create_task(tenant_id: PydanticObjectId, device_id: PydanticObjectId, 
     await device.replace()
     print(device.json())
     return status.HTTP_200_OK
-
-

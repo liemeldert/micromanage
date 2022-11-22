@@ -62,6 +62,24 @@ async def exec_task(device: Device, task: Task, websocket: WebSocket) -> None:
         await device.save()
 
 
+async def get_device(device_serial: str, tenant_id: str) -> Device:
+    """
+    Gets a device from the database.
+    Args:
+        device_serial: device id
+
+    Returns: device object
+
+    """
+    if device_serial.startswith("devidsep"):
+        device: Device = await Device.get(PydanticObjectId(str(device_serial)[8:]))
+    else:
+        device: Device = await Device.find_one(
+            Device.serial == device_serial, Device.tenant_id == PydanticObjectId(tenant_id))
+
+    return device
+
+
 @router.websocket("/ws/{tenant_id}/{device_serial}")
 async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_serial: str,
                              device_id: PydanticObjectId = None) -> None:
@@ -76,21 +94,18 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_serial
         device_serial:
     """
     running = True
-    print(tenant_id, device_serial)
     tenant: Tenant = await Tenant.get(PydanticObjectId(tenant_id))
-    if device_serial.startswith("devidsep"):
-        device: Device = await Device.get(PydanticObjectId(str(device_serial)[8:]))
-    else:
-        device: Device = await Device.find_one(
-            Device.serial == device_serial, Device.tenant_id == PydanticObjectId(tenant_id))
+
+    device = await get_device(device_serial, tenant_id)
+
+    if tenant.autoenroll and device is None:
+        device = Device(tenant=tenant_id, serial=device_serial)
+
     print(tenant.id, device.id)
 
     if tenant is None:
         await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
         return status.HTTP_404_NOT_FOUND
-
-    if tenant.autoenroll and device is None:
-        device = Device(tenant=tenant_id, serial=device_serial)
 
     if device is None:
         await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
@@ -106,6 +121,7 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_serial
             while running:
                 try:
                     await asyncio.sleep(10)
+                    device = await get_device(device_serial, tenant_id)
                     logging.debug("updating: " + str(device.id))
                     # await device.update()
                     # Generate tasks
@@ -136,7 +152,6 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_serial
                                     await exec_task(device, task, websocket)
                         websocket.send_text("sleep")
                 except WebSocketDisconnect:
-                    print("oh no!")
                     break
 
         # await asyncio.gather(send_events(websocket, device), receive_messages(websocket, device))
@@ -152,7 +167,6 @@ async def websocket_endpoint(websocket: WebSocket, tenant_id: str, device_serial
         # except Exception as e:
         #     print(e)
         running = False
-        print("씨발!!")
     except WebSocketDisconnect:
         await websocket.close()
         running = False

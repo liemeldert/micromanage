@@ -125,7 +125,7 @@ class Device(Document):
     serial: str
     tenant_id: str
 
-    system: Json = None
+    system: str = None
     tags: list = []
     group_id: str = None
 
