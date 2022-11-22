@@ -41,13 +41,13 @@ def install_pkg(path: str = "/tmp/mmpkg.pkg"):
     """
     Installs a package.
     """
-    result = str(subprocess.run(f"installer -pkg {path} -target /",
-                                stdout=subprocess.PIPE, shell=True, check=True).stdout.strip())
-    if "installer: Error - the package path specified was invalid: " in result:
-        raise FileNotFoundError("Package not found.")
-    elif "installer: Error - the package does not contain a distribution file" in result:
-        raise pydantic.ValidationError("Package is not a valid installer package.")
+    subprocess.run(f"sudo installer -pkg '{path}' -target /", shell=True, check=True)
+    # if "installer: Error - the package path specified was invalid: " in result:
+    #     raise FileNotFoundError("Package not found.")
+    # elif "installer: Error - the package does not contain a distribution file" in result:
+    #     raise pydantic.ValidationError("Package is not a valid installer package.")
     subprocess.run(f"rm {path}", shell=True, check=True)
+    return
 
 
 def install_dmg(path: str = "/tmp/mmdmg.dmg", install_path: str = "/Applications"):

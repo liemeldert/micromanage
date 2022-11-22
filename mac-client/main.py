@@ -71,7 +71,9 @@ def recieve_events(ws):
                     mac.install_pkg()
                 # this isn't any better.
                 except Exception as e:
-                    logging.error("Failed to download package.\n" + result)
+                    if result is None:
+                        result = "unknown error"
+                    logging.error("Failed to download dmg.\n" + result)
                     logging.error(str(e))
                     ws.send("istatus: failed")
                     ws.send(str(e))
@@ -79,10 +81,10 @@ def recieve_events(ws):
             if task.package.package_name in mac.get_installed():
                 logging.info("package installed successfully")
                 ws.send("istatus: complete")
-            else:
-                logging.error("package failed to install")
-                ws.send("istatus: failed")
-                ws.send("package failed to install for unknown reason")
+            # else:
+            #     logging.error("package failed to install")
+            #     ws.send("istatus: failed")
+            #     ws.send("package failed to install for unknown reason")
         elif "installed" in data:
             ws.send("False")
 
