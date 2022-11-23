@@ -1,0 +1,42 @@
+{
+  "name": "mm-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@mantine/carousel": "^5.8.2",
+    "@mantine/core": "^5.8.2",
+    "@mantine/dates": "^5.8.2",
+    "@mantine/dropzone": "^5.8.2",
+    "@mantine/form": "^5.8.2",
+    "@mantine/hooks": "^5.8.2",
+    "@mantine/modals": "^5.8.2",
+    "@mantine/notifications": "^5.8.2",
+    "@mantine/nprogress": "^5.8.2",
+    "@mantine/prism": "^5.8.2",
+    "@mantine/spotlight": "^5.8.2",
+    "@mantine/tiptap": "^5.8.2",
+    "@tabler/icons": "^1.112.0",
+    "@tiptap/extension-link": "^2.0.0-beta.202",
+    "@tiptap/react": "^2.0.0-beta.202",
+    "@tiptap/starter-kit": "^2.0.0-beta.202",
+    "dayjs": "^1.11.6",
+    "embla-carousel-react": "^7.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vitejs/plugin-react": "^2.2.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3"
+  }
+}
