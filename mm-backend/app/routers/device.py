@@ -2,7 +2,7 @@ import datetime
 import json
 
 from beanie import PydanticObjectId
-from fastapi import status, APIRouter, Security
+from fastapi import status, APIRouter, Security, Depends
 from fastapi_auth0 import Auth0User
 
 from ..internal import database
@@ -12,8 +12,8 @@ from ..internal.utils import auth
 router = APIRouter()
 
 
-@router.post("/{tenant_id}/{serial}/create_device")  # user: Auth0User = Security(auth.get_user)
-async def create_device(tenant_id: str, serial: str):
+@router.post("/{tenant_id}/{serial}/create_device", dependencies=[Depends(auth.implicit_scheme)])  # user: Auth0User = Security(auth.get_user)
+async def create_device(tenant_id: str, serial: str, user: Auth0User = Depends(auth.get_user)):
     """
     Creates a new device.
     Args:
@@ -28,8 +28,8 @@ async def create_device(tenant_id: str, serial: str):
     if tenant is None:
         return status.HTTP_404_NOT_FOUND
 
-    # if user.id not in tenant.users:
-    #     return status.HTTP_403_FORBIDDEN
+    if user.id not in tenant.users:
+        return status.HTTP_403_FORBIDDEN
 
     device = Device(tenant_id=tenant_id, serial=serial)
 
@@ -40,8 +40,8 @@ async def create_device(tenant_id: str, serial: str):
     return device.json()
 
 
-@router.get("/{tenant_id}/get_devices")
-async def get_devices(tenant_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{tenant_id}/get_devices", dependencies=[Depends(auth.implicit_scheme)])
+async def get_devices(tenant_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Retrieves a list of devices for a tenant.
     Args:
@@ -62,8 +62,8 @@ async def get_devices(tenant_id: str, user: Auth0User = Security(auth.get_user))
     return {"devices": [device.json() for device in devices]}
 
 
-@router.get("/{tenant_id}/{device_id}/get_device")
-async def get_device(tenant_id: str, device_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{tenant_id}/{device_id}/get_device", dependencies=[Depends(auth.implicit_scheme)])
+async def get_device(tenant_id: str, device_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Retrieves information about device.
     Args:
@@ -85,9 +85,10 @@ async def get_device(tenant_id: str, device_id: str, user: Auth0User = Security(
     return device.json()
 
 
-@router.post("/{tenant_id}/{device_id}/{application_id}/package_id/create_task")
+@router.post("/{tenant_id}/{device_id}/{application_id}/package_id/create_task", dependencies=[Depends(auth.implicit_scheme)])
 async def create_task(tenant_id: PydanticObjectId, device_id: PydanticObjectId, application_id: PydanticObjectId,
-                      package_id: PydanticObjectId, command: str = "install", exec_time: datetime.datetime = None):
+                      package_id: PydanticObjectId, command: str = "install", exec_time: datetime.datetime = None,
+                      user: Auth0User = Depends(auth.get_user)):
     """
     Creates a new task.
     Args:
@@ -99,7 +100,11 @@ async def create_task(tenant_id: PydanticObjectId, device_id: PydanticObjectId, 
     Returns:
 
     """
+
     tenant = await Tenant.get(tenant_id)
+
+    if user.id not in tenant.users:
+        return status.HTTP_403_FORBIDDEN
 
     device = await Device.get(device_id)
     application = await Application.get(application_id)

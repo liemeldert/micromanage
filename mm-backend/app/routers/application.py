@@ -4,7 +4,7 @@ import logging
 import boto3
 
 from beanie import PydanticObjectId
-from fastapi import status, APIRouter, Security, UploadFile
+from fastapi import status, APIRouter, Security, UploadFile, Depends
 from fastapi.params import File
 from fastapi_auth0 import Auth0User
 
@@ -16,7 +16,7 @@ from ..internal.utils import auth
 router = APIRouter()
 
 
-@router.post("/{org_id}/create_application")  # user: Auth0User = Security(auth.get_user)
+@router.post("/{org_id}/create_application", dependencies=[Depends(auth.implicit_scheme)])  # user: Auth0User = Depends(auth.get_user)
 async def create_application(org_id: str, application: Application):
     """
     Creates a new application.
@@ -41,8 +41,8 @@ async def create_application(org_id: str, application: Application):
     return appl.json()
 
 
-@router.get("/{org_id}/get_applications")
-async def get_applications(org_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{org_id}/get_applications", dependencies=[Depends(auth.implicit_scheme)])
+async def get_applications(org_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Retrieves a list of applications for an organization.
     Args:
@@ -63,8 +63,8 @@ async def get_applications(org_id: str, user: Auth0User = Security(auth.get_user
     return {"applications": [application.json() for application in applications]}
 
 
-@router.get("/{org_id}/{application_id}/get_application")
-async def get_application(org_id: str, application_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{org_id}/{application_id}/get_application", dependencies=[Depends(auth.implicit_scheme)])
+async def get_application(org_id: str, application_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Retrieves information about application.
     :param user: auth0 user object
@@ -84,8 +84,8 @@ async def get_application(org_id: str, application_id: str, user: Auth0User = Se
     return application.json()
 
 
-@router.post("/{org_id}/{application_id}/update_application")
-async def update_application(org_id: str, application_id: str, application: Application, user: Auth0User = Security(auth.get_user)):
+@router.post("/{org_id}/{application_id}/update_application", dependencies=[Depends(auth.implicit_scheme)])
+async def update_application(org_id: str, application_id: str, application: Application, user: Auth0User = Depends(auth.get_user)):
     """
     Updates an application.
     Args:
@@ -121,8 +121,8 @@ async def update_application(org_id: str, application_id: str, application: Appl
     return appl.json()
 
 
-@router.post("/{org_id}/{application_id}/delete_application")
-async def delete_application(org_id: str, application_id: str, user: Auth0User = Security(auth.get_user)):
+@router.post("/{org_id}/{application_id}/delete_application", dependencies=[Depends(auth.implicit_scheme)])
+async def delete_application(org_id: str, application_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Deletes an application.
     Args:
@@ -148,7 +148,7 @@ async def delete_application(org_id: str, application_id: str, user: Auth0User =
     return status.HTTP_200_OK
 
 
-@router.post("/{org_id}/{application_id}/create_package_mac")
+@router.post("/{org_id}/{application_id}/create_package_mac", dependencies=[Depends(auth.implicit_scheme)])
 async def create_package(package: MacPackage, org_id: PydanticObjectId, application_id: PydanticObjectId):
     """
     Creates a new package for an application.
@@ -181,8 +181,8 @@ async def create_package(package: MacPackage, org_id: PydanticObjectId, applicat
     return package.json()
 
 
-@router.get("/{org_id}/{application_id}/get_packages")
-async def get_packages(org_id: str, application_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{org_id}/{application_id}/get_packages", dependencies=[Depends(auth.implicit_scheme)])
+async def get_packages(org_id: str, application_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Retrieves a list of packages for an application.
     Args:
@@ -209,8 +209,8 @@ async def get_packages(org_id: str, application_id: str, user: Auth0User = Secur
     return {"packages": application.mac_packages}
 
 
-@router.get("/{org_id}/{package_id}/get_package")
-async def get_package(org_id: str, package_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{org_id}/{package_id}/get_package", dependencies=[Depends(auth.implicit_scheme)])
+async def get_package(org_id: str, package_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Retrieves information about a package.
     Args:
@@ -237,8 +237,8 @@ async def get_package(org_id: str, package_id: str, user: Auth0User = Security(a
     return package.json()
 
 
-@router.post("/{org_id}//{package_id}/update_package")
-async def update_package(org_id: str, package_id: str, package: MacPackage, user: Auth0User = Security(auth.get_user)):
+@router.post("/{org_id}//{package_id}/update_package", dependencies=[Depends(auth.implicit_scheme)])
+async def update_package(org_id: str, package_id: str, package: MacPackage, user: Auth0User = Depends(auth.get_user)):
     """
     Updates a package.
     Args:
@@ -275,8 +275,8 @@ async def update_package(org_id: str, package_id: str, package: MacPackage, user
     return pack.json()
 
 
-@router.post("/{org_id}/{package_id}/delete_package")
-async def delete_package(org_id: str, package_id: str, user: Auth0User = Security(auth.get_user)):
+@router.post("/{org_id}/{package_id}/delete_package", dependencies=[Depends(auth.implicit_scheme)])
+async def delete_package(org_id: str, package_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Deletes a package.
     Args:
@@ -315,8 +315,8 @@ async def delete_package(org_id: str, package_id: str, user: Auth0User = Securit
     return status.HTTP_200_OK
 
 
-@router.get("/{org_id}/{package_id}/download_package")
-async def download_package(org_id: str, package_id: str, user: Auth0User = Security(auth.get_user)):
+@router.get("/{org_id}/{package_id}/download_package", dependencies=[Depends(auth.implicit_scheme)])
+async def download_package(org_id: str, package_id: str, user: Auth0User = Depends(auth.get_user)):
     """
     Responds with a s3 presigned url to download
     Args:
@@ -347,8 +347,8 @@ async def download_package(org_id: str, package_id: str, user: Auth0User = Secur
     return presigned
 
 
-@router.post("/{org_id}/{package_id}/upload_package_direct")
-async def upload_package(org_id: str, package_id: str, file: UploadFile = File(...), user: Auth0User = Security(auth.get_user)):
+@router.post("/{org_id}/{package_id}/upload_package_direct", dependencies=[Depends(auth.implicit_scheme)])
+async def upload_package(org_id: str, package_id: str, file: UploadFile = File(...), user: Auth0User = Depends(auth.get_user)):
     """
     Uploads a package to s3 with boto3.
     Args:

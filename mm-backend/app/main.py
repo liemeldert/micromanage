@@ -2,7 +2,7 @@ import logging
 
 import motor
 from beanie import init_beanie
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, status
 from fastapi_auth0 import Auth0User
 
 from .internal.config import MONGO_URI
@@ -45,10 +45,10 @@ async def ping() -> dict:
     return {"message": "pong"}
 
 
-@app.get("/private/ping")
-def private_ping(user: Auth0User = Depends(auth.implicit_scheme)):
+@app.get("/private/ping", dependencies=[Depends(auth.implicit_scheme)])
+def private_ping(user: Auth0User = Depends(auth.get_user)):
     """
     A valid access token is required to access this route
     user: Auth0User, required, access token
     """
-    return {"message": "pong", "user": user.id}
+    return {"message": f"{user}"}
