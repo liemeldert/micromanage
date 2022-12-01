@@ -97,15 +97,15 @@ def main():
             ws = websocket.WebSocket()
 
             # can't be bothered to make this a thread yet
-            # try:
-            ws.connect(f"ws://{base_url}/ws/{tenant}/{device}")
-            ws.send(json.dumps(mac.get_system()))
-            recieve_events(ws)
+            try:
+                ws.connect(f"ws://{base_url}/ws/{tenant}/{device}")
+                ws.send(json.dumps(mac.get_system()))
+                recieve_events(ws)
             # bad.
-            # except Exception as e:
-            #     time.sleep(1)
-            #     fails += 1
-            #     logging.error("Failed to connect to server.\n" + str(e))
+            except Exception as e:
+                time.sleep(1)
+                fails += 1
+                logging.error("Failed to connect to server.\n" + str(e))
         time.sleep(120)
 
 

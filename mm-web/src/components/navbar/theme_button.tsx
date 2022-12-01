@@ -17,3 +17,5 @@ function ThemeButton() {
     </ActionIcon>
   );
 }
+
+export default ThemeButton;

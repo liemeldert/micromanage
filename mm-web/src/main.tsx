@@ -1,5 +1,5 @@
 import React from 'react'
-import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { MantineProvider, ColorSchemeProvider, ColorScheme, Navbar } from '@mantine/core';
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
@@ -9,25 +9,25 @@ import {
   Route,
 } from "react-router-dom";
 import { useState } from 'react';
+import Index from './pages';
+import { DoubleNavbar } from './components/navbar/navbar';
+import Dashboard from './pages/dashboard';
 
 const router = createBrowserRouter([
   {
-    path: "/",  
-    element: <Index />,
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+    ],
   },
 ]);
 
-const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-        <App />
-      </MantineProvider>
-    </ColorSchemeProvider>
+      <RouterProvider router={router} />
   </React.StrictMode>
 )
