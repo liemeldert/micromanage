@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createStyles, Navbar, UnstyledButton, Tooltip, Title } from '@mantine/core';
+import { createStyles, Navbar, UnstyledButton, Tooltip, Title, Text } from '@mantine/core';
 import {
   IconHome2,
   IconGauge,
@@ -121,17 +121,10 @@ const mainLinksMockdata = [
 ];
 
 const linksMockdata = [
-  'Security',
-  'Settings',
-  'Dashboard',
-  'Releases',
-  'Account',
-  'Orders',
-  'Clients',
-  'Databases',
-  'Pull Requests',
-  'Open Issues',
-  'Wiki pages',
+  'Devices',
+  'Groups',
+  'Applications',
+  'Administration'
 ];
 
 export function DoubleNavbar() {
@@ -169,7 +162,16 @@ export function DoubleNavbar() {
       <Navbar.Section grow className={classes.wrapper}>
         <div className={classes.aside}>
           <div className={classes.logo}>
-            <MantineLogo type="mark" size={30} />
+            <Text
+              variant="gradient"
+              gradient={{ from: 'indigo', to: 'cyan', deg: 45 }}
+              sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+              ta="center"
+              fz="xl"
+              fw={700}
+            >
+              Micromanage.
+            </Text>
           </div>
           {mainLinks}
         </div>
@@ -184,3 +186,5 @@ export function DoubleNavbar() {
     </Navbar>
   );
 }
+
+export default Navbar;
