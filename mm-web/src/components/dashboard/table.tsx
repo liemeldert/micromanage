@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "@mantine/core";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -21,11 +21,14 @@ export default function DataTable() {
   
 
   useEffect(() => {
+
+    const [rows, setRows] = useState()
+
     async function callApi() {
       try {
-        const token = await getTokenSilently();
+        const token = await getAccessTokenSilently();
 
-        const response = await fetch("https://my-api.com/endpoint", {
+        const response = await fetch(import.meta.env.VITE_API_URL, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -33,6 +36,15 @@ export default function DataTable() {
 
         const responseData = await response.json();
         console.log(responseData);
+        if (responseData === null) {
+          console.log("No data");
+          
+        }
+        const effect_rows = responseData.map((row) => (
+          <tr key={row.name}>
+
+        </tr>
+        ));
       } catch (error) {
         console.error(error);
       }
@@ -40,24 +52,13 @@ export default function DataTable() {
 
     callApi();
   }, []);
-
-
-
-    const rows = elements.map((element) => (
-        <tr key={element.name}>
-          <td>{element.position}</td>
-          <td>{element.name}</td>
-          <td>{element.symbol}</td>
-          <td>{element.mass}</td>
-        </tr>
-      ));
     
       return (
         <Table>
           <thead>
             <tr>
-              <th>Element position</th>
-              <th>Element name</th>
+              <th>Device hostname</th>
+              <th>Serial Number</th>
               <th>Symbol</th>
               <th>Atomic mass</th>
             </tr>
