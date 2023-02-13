@@ -1,1 +1,6 @@
 typer[all]
+rich
+keyring
+pydantic~=1.10
+PyJWT
+cryptography
