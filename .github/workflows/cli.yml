@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.x"
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r rmm-cli/equirements.txt
       - name: Run Pylint
         run: pylint --rcfile=pylintrc mm-cli
       - name: Run Flake8

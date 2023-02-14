@@ -19,10 +19,10 @@ jobs:
         with:
           python-version: "3.x"
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r mm-backend/requirements.txt
       - name: Run Pylint
-        run: pylint --rcfile=pylintrc mm-cli
+        run: pylint --rcfile=pylintrc mm-backend
       - name: Run Flake8
-        run: flake8 mm-cli
+        run: flake8 mm-backend
       - name: Run Bandit
-        run: bandit -r mm-cli
+        run: bandit -r mm-backend

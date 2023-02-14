@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run Pylint
-        run: pylint --rcfile=pylintrc mm-cli
+        run: pylint --rcfile=pylintrc mac-client
       - name: Run Flake8
-        run: flake8 mm-cli
+        run: flake8 mac-client
       - name: Run Bandit
-        run: bandit -r mm-cli
+        run: bandit -r mac-client
