@@ -24,7 +24,7 @@ def setup(tenant_id: str = typer.Option(..., prompt=True)):
 
     t_limit = (authorization_information['expires_in'] / authorization_information['interval']).round()
 
-    for i in track(range(t_limit), description="Time remaining..."):
+    for _ in track(range(t_limit), description="Time remaining..."):
         time.sleep(authorization_information['interval'])  # wait for interval
 
         conn = http.client.HTTPSConnection("")
@@ -39,9 +39,8 @@ def setup(tenant_id: str = typer.Option(..., prompt=True)):
             print(f"[green]Authentication successful![/green]")
             config.token = data["access_token"]
             config.token_expiration = data["expires_in"]
+            save_config(config)
             return
-
-    save_config(config)
 
 
 # @app.command()
