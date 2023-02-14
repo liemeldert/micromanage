@@ -48,8 +48,6 @@ def create_presigned_post(bucket_name, object_name,
     :return: None if error.
     """
 
-    logging.critical(aws_endpoint, aws_access_key_id, aws_secret_access_key)
-
     s3_client = boto3.client('s3',
                              endpoint_url=aws_endpoint,
                              aws_access_key_id=aws_access_key_id,
