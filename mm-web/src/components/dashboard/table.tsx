@@ -1,70 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { Table } from "@mantine/core";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export default function DataTable() {
-  // Clean this up later
-  const {
-    // Auth state:
-    error,
-    isAuthenticated,
-    isLoading,
-    user,
-    // Auth methods:
-    getAccessTokenSilently,
-    getAccessTokenWithPopup,
-    getIdTokenClaims,
-    loginWithRedirect,
-    loginWithPopup,
-    logout,
-  } = useAuth0();
-  
+interface TableRow {
+  [key: string]: any;
+}
+
+interface AuthenticatedTableProps {
+  url: string;
+}
+
+function AuthenticatedTable({ url }: AuthenticatedTableProps) {
+  const [data, setData] = useState<TableRow[]>([]);
+  const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-
-    const [rows, setRows] = useState()
-
-    async function callApi() {
+    const fetchData = async () => {
       try {
         const token = await getAccessTokenSilently();
-
-        const response = await fetch(import.meta.env.VITE_API_URL, {
+        const response = await fetch(url, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
-
-        const responseData = await response.json();
-        console.log(responseData);
-        if (responseData === null) {
-          console.log("No data");
-          
-        }
-        const effect_rows = responseData.map((row) => (
-          <tr key={row.name}>
-
-        </tr>
-        ));
+        const json = await response.json();
+        setData(json);
       } catch (error) {
         console.error(error);
       }
-    }
+    };
+    fetchData();
+  }, [getAccessTokenSilently, url]);
 
-    callApi();
-  }, []);
-    
-      return (
-        <Table>
-          <thead>
-            <tr>
-              <th>Device hostname</th>
-              <th>Serial Number</th>
-              <th>Symbol</th>
-              <th>Atomic mass</th>
-            </tr>
-          </thead>
-          <tbody>{rows}</tbody>
-        </Table>
-      );    
-
+  return (
+    <table>
+      <thead>
+        <tr>
+          {data.length > 0 &&
+            Object.keys(data[0]).map((key) => <th key={key}>{key}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, index) => (
+          <tr key={index}>
+            {Object.values(row).map((value, index) => (
+              <td key={index}>{value}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
+
+export default AuthenticatedTable;

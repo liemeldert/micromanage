@@ -7,8 +7,8 @@ import time
 from rich.progress import track
 from rich import print
 
-from lib import authentication
-from lib.config import CLIConfig, save_config
+from util import authentication
+from util.config import CLIConfig, save_config
 app = typer.Typer()
 
 
